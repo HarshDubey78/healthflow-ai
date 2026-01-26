@@ -1,4 +1,4 @@
-cat > README.md << 'EOF'
+
 # 🏥 HealthFlow AI - Medical Recovery Intelligence System
 
 AI-powered adaptive fitness and nutrition for post-surgical patients and chronic disease management.
@@ -55,13 +55,6 @@ npm run dev
 - **Live Demo**: [Coming Soon]
 - **Video**: [Coming Soon]
 
-## 📊 Hackathon Submission
-- **Checkpoint**: 2
-- **Features**: Multi-agent orchestration, medical constraint extraction, HRV monitoring, medication interaction detection
-
-## 📝 License
-MIT
 
 ## 👤 Author
 Harsh Dubey
-EOF
