@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import AIOutput from './AIOutput'
 
 const API_URL = 'http://localhost:5001/api'
 
@@ -91,10 +92,8 @@ function MedicalProfile({ onConstraints, onNext }: MedicalProfileProps) {
       {constraints && (
         <div className="constraints-result">
           <h3>AI-Extracted Constraints</h3>
-          <div className="agent-reasoning">
-            <pre>{constraints.response}</pre>
-          </div>
-          
+          <AIOutput response={constraints.response} fallback={false} />
+
           <button onClick={onNext} className="next-btn">
             Generate Workout Plan →
           </button>

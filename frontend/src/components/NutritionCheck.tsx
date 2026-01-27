@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import AIOutput from './AIOutput'
 
 const API_URL = 'http://localhost:5001/api'
 
@@ -88,7 +89,10 @@ function NutritionCheck() {
 
           <div className="nutritional-analysis">
             <h3>Nutritional Analysis</h3>
-            <pre>{analysis.nutritional_analysis}</pre>
+            <AIOutput
+              response={analysis.nutritional_analysis}
+              fallback={analysis.nutritional_analysis.includes('AI Analysis Unavailable')}
+            />
           </div>
 
           <div className={`safety-badge ${analysis.safe_to_consume ? 'safe' : 'caution'}`}>

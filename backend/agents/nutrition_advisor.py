@@ -34,23 +34,46 @@ Provide:
 """
         
         response = self.gemini.generate_with_thinking(prompt, system_instruction)
-        
+
+        # Provide better error message if API fails
+        if not response['success']:
+            print(f"⚠️ Gemini API failed for nutrition analysis: {response.get('error', 'Unknown error')}")
+            analysis_text = f"""
+⚠️ AI Analysis Unavailable
+
+Unfortunately, the AI nutritional analysis could not be generated at this time.
+Error: {response.get('error', 'API quota may be exceeded')}
+
+Basic Assessment:
+- Please review the medication interactions shown above
+- Consult with your healthcare provider about specific food-medication interactions
+- Consider general recovery nutrition principles: adequate protein, anti-inflammatory foods, hydration
+
+[Note: Full AI analysis unavailable due to API limitations]
+"""
+        else:
+            analysis_text = response['response']
+
         result = {
-            'nutritional_analysis': response['response'] if response['success'] else 'Analysis failed',
+            'nutritional_analysis': analysis_text,
             'medication_interactions': interactions,
             'safe_to_consume': len(interactions) == 0 or all(i['severity'] != 'high' for i in interactions)
         }
-        
+
         # Log to Opik
-        self.opik.log_agent_decision(
-            agent_name='nutrition_advisor',
-            input_data={'meal': meal_description, 'medications': medications},
-            output_data=result,
-            reasoning=response.get('response', ''),
-            metadata={
-                'interactions_found': len(interactions),
-                'interaction_severity': [i['severity'] for i in interactions]
-            }
-        )
-        
+        try:
+            self.opik.log_agent_decision(
+                agent_name='nutrition_advisor',
+                input_data={'meal': meal_description, 'medications': medications},
+                output_data=result,
+                reasoning=response.get('response', ''),
+                metadata={
+                    'interactions_found': len(interactions),
+                    'interaction_severity': [i['severity'] for i in interactions],
+                    'api_success': response['success']
+                }
+            )
+        except Exception as e:
+            print(f"⚠️ Opik logging failed: {e}")
+
         return result

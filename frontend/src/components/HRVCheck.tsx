@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import AIOutput from './AIOutput'
 
 const API_URL = 'http://localhost:5001/api'
 
@@ -9,9 +10,22 @@ const axiosInstance = axios.create({
   timeout: 30000
 })
 
+interface HRVData {
+  hrv_data: {
+    hrv_ms: number
+    baseline_hrv: number
+    resting_hr: number
+    sleep_hours: number
+  }
+  analysis: {
+    response: string
+    success: boolean
+  }
+}
+
 function HRVCheck({ onAnalysis, onNext }) {
   const [loading, setLoading] = useState(false)
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<HRVData | null>(null)
 
   const checkHRV = async () => {
     setLoading(true)
@@ -75,7 +89,10 @@ function HRVCheck({ onAnalysis, onNext }) {
 
       <div className="agent-analysis">
         <h3>🤖 AI Analysis</h3>
-        <pre>{data.analysis.response}</pre>
+        <AIOutput
+          response={data?.analysis?.response || ''}
+          fallback={(data?.analysis?.response || '').includes('rule-based fallback')}
+        />
       </div>
 
       <button onClick={onNext} className="next-btn">

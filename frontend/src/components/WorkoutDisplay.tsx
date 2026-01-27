@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import AIOutput from './AIOutput'
 
 const API_URL = 'http://localhost:5001/api'
 
@@ -28,6 +29,24 @@ function WorkoutDisplay({ hrvAnalysis, medicalConstraints }: WorkoutDisplayProps
     equipment: ['dumbbells', 'resistance bands'],
     energy_level: 6
   })
+  const [equipmentInput, setEquipmentInput] = useState('')
+
+  const addEquipment = () => {
+    if (equipmentInput.trim()) {
+      setContext({
+        ...context,
+        equipment: [...context.equipment, equipmentInput.trim().toLowerCase()]
+      })
+      setEquipmentInput('')
+    }
+  }
+
+  const removeEquipment = (item: string) => {
+    setContext({
+      ...context,
+      equipment: context.equipment.filter(eq => eq !== item)
+    })
+  }
 
   const generateWorkout = async () => {
     setLoading(true)
@@ -72,11 +91,30 @@ function WorkoutDisplay({ hrvAnalysis, medicalConstraints }: WorkoutDisplayProps
 
         <div className="input-group">
           <label>Available Equipment</label>
-          <p className="equipment-tags">
+          <div className="equipment-tags">
             {context.equipment.map(eq => (
-              <span key={eq} className="tag">{eq}</span>
+              <span key={eq} className="tag equipment-tag">
+                {eq}
+                <button
+                  className="tag-remove"
+                  onClick={() => removeEquipment(eq)}
+                  title="Remove equipment"
+                >
+                  ×
+                </button>
+              </span>
             ))}
-          </p>
+          </div>
+          <div className="equipment-input">
+            <input
+              type="text"
+              placeholder="Add equipment (e.g., kettlebells, yoga mat)"
+              value={equipmentInput}
+              onChange={(e) => setEquipmentInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && addEquipment()}
+            />
+            <button onClick={addEquipment} className="btn-add">Add</button>
+          </div>
         </div>
       </div>
 
@@ -87,9 +125,10 @@ function WorkoutDisplay({ hrvAnalysis, medicalConstraints }: WorkoutDisplayProps
       {workout && (
         <div className="workout-result">
           <h3>Your Personalized Workout Plan</h3>
-          <div className="agent-reasoning">
-            <pre>{workout.response}</pre>
-          </div>
+          <AIOutput
+            response={workout.response}
+            fallback={workout.response.includes('rule-based fallback')}
+          />
 
           <div className="feedback">
             <p>Was this workout appropriate for your medical constraints and recovery state?</p>
