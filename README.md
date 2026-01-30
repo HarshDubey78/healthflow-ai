@@ -224,38 +224,7 @@ Built for Encode Club Hackathon 2025
 - Email: harshdubey78@gmail.com
 - LinkedIn: [Your LinkedIn]
 
----
 
-## 🙏 Acknowledgments
-
-- **Google Gemini Team** - For the powerful multi-modal LLM APIs
-- **Comet ML / Opik Team** - For the observability platform
-- **Encode Club** - For hosting this incredible hackathon
-- **Medical Professionals** - Who provided constraint validation feedback
-
----
-
-## 📝 Notes for Judges
-
-### What Makes This Special
-1. **Real Problem**: 25% re-injury rate is a genuine healthcare crisis
-2. **Novel Approach**: First fitness app to truly read medical records
-3. **Multi-Agent**: Not just one LLM - coordinated specialist agents
-4. **Safety-First**: Medical constraints validated on every generation
-5. **Fully Functional**: Not a prototype - working end-to-end system
-
-### Technical Depth
-- **4 autonomous agents** with distinct roles and LLMs
-- **Opik observability** on all agent calls for transparency
-- **Privacy-first architecture** (on-device processing)
-- **Voice-first interface** for hands-free logging
-- **Adaptive algorithms** based on real-time biomarkers
-
-### Impact Potential
-- **60M+ users** (post-surgical patients yearly in US alone)
-- **$2B+ market** (remote physical therapy + fitness)
-- **Clinical validation path** (FDA medical device consideration)
-- **Insurance coverage** potential (proven outcomes)
 
 ---
 
