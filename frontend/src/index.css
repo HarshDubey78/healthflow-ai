@@ -25,12 +25,8 @@ html, body {
 }
 
 #root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
   width: 100%;
-  padding: 20px;
 }
 
 a {
@@ -45,26 +41,12 @@ a:hover {
 }
 
 button {
-  border-radius: 8px;
-  border: none;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.3s;
-}
-
-button:hover {
-  transform: translateY(-2px);
 }
 
 input, textarea, select {
   font-family: inherit;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
@@ -74,8 +56,5 @@ button:focus-visible {
   }
   a:hover {
     color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }
