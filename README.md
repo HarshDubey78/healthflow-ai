@@ -181,33 +181,6 @@ Frontend runs on: http://localhost:5173
 
 ---
 
-## 🏗️ Architecture Details
-
-### Multi-Agent System
-
-#### Medical Intelligence Agent
-- **LLM**: Gemini 2.0 Flash (1500 req/day)
-- **Role**: Parse medical documents, extract constraints
-- **Tools**: Document reader, constraint extractor
-- **Output**: List of restrictions with severity levels
-
-#### HRV Monitor Agent
-- **LLM**: Gemini 2.0 Flash-Lite (1000 req/day)
-- **Role**: Analyze recovery biomarkers
-- **Input**: HRV, sleep hours, resting HR vs baseline
-- **Output**: Recovery status (optimal/good/moderate/poor/critical)
-
-#### Nutrition Advisor Agent
-- **LLM**: Gemini 2.0 Flash (1500 req/day)
-- **Role**: Check medication-food interactions
-- **Database**: 500+ known interactions
-- **Output**: Warnings + safe alternatives
-
-#### Workout Orchestrator Agent
-- **LLM**: Gemini 2.0 Flash-Lite (1000 req/day)
-- **Role**: Generate adaptive workout plans
-- **Constraints**: Medical restrictions + HRV status + equipment + time
-- **Output**: Structured workout with exercises, sets, reps, rest
 
 ### Observability Pipeline
 ```
@@ -222,26 +195,6 @@ Feedback Loop
 
 ---
 
-## 🔒 Privacy & Safety
-
-### Privacy-First Design
-- ✅ **On-device processing** for medical records (never sent to cloud)
-- ✅ **Local storage** only - no cloud uploads
-- ✅ **No data sharing** with third parties
-- ✅ **HIPAA considerations** in architecture
-
-### Medical Disclaimers
-- ⚠️ **Not medical advice** - fitness and wellness tool only
-- ⚠️ **Consult physician** before starting any exercise program
-- ⚠️ **Emergency protocols** - directs users to seek medical care when needed
-
-### Safety Mechanisms
-- ✅ **Constraint validation** on every workout generation
-- ✅ **HRV thresholds** to prevent overtraining
-- ✅ **Interaction database** for nutrition safety
-- ✅ **Human-in-the-loop** review for edge cases
-
----
 
 ## 📈 Evaluation & Metrics
 
@@ -257,116 +210,8 @@ Feedback Loop
 
 ---
 
-## 🎥 Demo
 
-### Live Application
-1. Visit the landing page
-2. Click "Try Live Demo"
-3. Complete 5-step onboarding
-4. Generate your first adaptive workout
-5. Check nutrition interactions
-6. View HRV trends
 
-### Key Demo Points
-- ✅ Medical record parsing (show PT note → constraints)
-- ✅ HRV analysis (show graph → workout adjustment)
-- ✅ Nutrition checking (show warfarin warning)
-- ✅ Workout generation (show adaptive plan)
-- ✅ Voice logging (demo hands-free)
-
----
-
-## 🏆 Hackathon Highlights
-
-### Functionality
-✅ Fully working multi-agent system
-✅ 4 specialized LLMs with tool use
-✅ HRV tracking and analysis
-✅ Workout generation engine
-✅ Nutrition safety checker
-
-### Real-World Relevance
-✅ Solves 25% re-injury rate problem
-✅ Targets 60M+ post-surgical patients
-✅ Sustainable fitness routines
-✅ Proven need in healthcare
-
-### LLMs & Agents
-✅ 4 autonomous agents (Gemini 2.0)
-✅ Reasoning chains visible
-✅ Tool use (medical parsing, HRV)
-✅ Inter-agent communication
-
-### Evaluation & Observability
-✅ Opik integration on all calls
-✅ Every decision tracked
-✅ Outcome measurement
-✅ Human-in-the-loop validation
-
-### Goal Alignment
-✅ Physical health support
-✅ Mental wellness focus
-✅ Recovery goals enabled
-✅ Stress management (via HRV)
-
-### Safety & Responsibility
-✅ Medical disclaimers prominent
-✅ Privacy-first architecture
-✅ Appropriate caveats
-✅ Promotes healthy behaviors
-
----
-
-## 🛣️ Roadmap
-
-### Phase 1 (Current)
-- ✅ Multi-agent system with 4 agents
-- ✅ HRV monitoring and analysis
-- ✅ Workout generation
-- ✅ Nutrition safety checking
-- ✅ Voice-first interface
-
-### Phase 2 (Next)
-- [ ] Integration with Apple Health/Google Fit APIs
-- [ ] Advanced exercise database (500+ movements)
-- [ ] Video demonstration library
-- [ ] Progress photos with AI analysis
-
-### Phase 3 (Future)
-- [ ] Physical therapist collaboration tools
-- [ ] Insurance integration for coverage
-- [ ] Clinical trial partnerships
-- [ ] FDA medical device consideration
-
----
-
-## 📚 Research & Citations
-
-### Supporting Evidence
-1. **Re-injury Rates**: Clinical studies show 20-30% re-injury in first year post-surgery
-2. **HRV Validity**: Heart rate variability proven predictor of overtraining (JAMA 2019)
-3. **Medication Interactions**: FDA database of 500+ clinically significant interactions
-4. **Adherence Improvement**: Adaptive systems show 2.5x better adherence vs static plans
-
----
-
-## 🤝 Contributing
-
-This is a hackathon project, but feedback is welcome!
-
-### Areas for Contribution
-- Medical professional review of constraint logic
-- Exercise database expansion
-- Integration with wearable APIs
-- Clinical trial design
-
----
-
-## 📄 License
-
-MIT License - See LICENSE file for details
-
----
 
 ## 👤 Author
 
@@ -376,7 +221,7 @@ Built for Encode Club Hackathon 2025
 
 ### Contact
 - GitHub: [Your GitHub]
-- Email: [Your Email]
+- Email: harshdubey78@gmail.com
 - LinkedIn: [Your LinkedIn]
 
 ---
