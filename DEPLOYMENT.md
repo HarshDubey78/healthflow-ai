@@ -57,16 +57,21 @@ In the Vercel dashboard, add these environment variables:
 **Required:**
 - `GEMINI_API_KEY` - Your Google Gemini API key
 - `OPIK_API_KEY` - Your Opik API key
-
-**Optional (pre-configured in vercel.json):**
-- `OPIK_URL_OVERRIDE` - Already set to `https://www.comet.com/opik/api`
-- `OPIK_WORKSPACE` - Already set to `default`
-- `OPIK_PROJECT_NAME` - Already set to `healthflow-ai`
+- `OPIK_URL_OVERRIDE` - Set to `https://www.comet.com/opik/api`
+- `OPIK_WORKSPACE` - Set to `default`
+- `OPIK_PROJECT_NAME` - Set to `healthflow-ai`
 
 **How to add:**
-1. Go to your project settings
-2. Click "Environment Variables"
-3. Add each variable for all environments (Production, Preview, Development)
+1. Go to your Vercel project dashboard
+2. Click "Settings" tab
+3. Click "Environment Variables" in the left sidebar
+4. Add each variable:
+   - Click "Add New"
+   - Enter Key (e.g., `GEMINI_API_KEY`)
+   - Enter Value (your actual API key)
+   - Select all environments: Production, Preview, Development
+   - Click "Save"
+5. Repeat for all 5 environment variables above
 
 ### 4. Deploy
 
