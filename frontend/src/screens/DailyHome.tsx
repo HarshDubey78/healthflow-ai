@@ -121,143 +121,82 @@ export const DailyHome: React.FC = () => {
   }
 
   return (
-    <div className="daily-home">
-      {/* Header */}
-      <header className="daily-header">
-        <div>
-          <h1 className="greeting">{getGreeting()}, {profile.name || 'there'}!</h1>
-          <p className="header-date">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
-        </div>
-        <div className="streak-badge">
-          <span className="streak-icon">🔥</span>
-          <span className="streak-number">{streak}</span>
-        </div>
-      </header>
+    <div className="daily-home-wrapper">
+      {/* Phone Mockup Container */}
+      <div className="phone-mockup">
+        {/* Phone Notch */}
+        <div className="phone-notch"></div>
 
-      {/* Recovery Card */}
-      <Card className="recovery-card">
-        <div className="recovery-header">
-          <div>
-            <h2 className="card-title">Today's Recovery</h2>
-            <StatusBadge status={todayHRV.recoveryScore} />
-          </div>
-          <div className="hrv-value">
-            <span className="hrv-number">{todayHRV.hrv}</span>
-            <span className="hrv-label">ms</span>
-          </div>
-        </div>
-
-        <div className="hrv-change">
-          <span className={`change-value ${todayHRV.deviation >= 0 ? 'positive' : 'negative'}`}>
-            {todayHRV.deviation >= 0 ? '↑' : '↓'} {Math.abs(todayHRV.deviation).toFixed(1)}%
-          </span>
-          <span className="change-label">from baseline</span>
-        </div>
-
-        {hrvHistory.length > 1 && (
-          <div className="hrv-trend-section">
-            <h4 className="trend-title">7-Day Trend</h4>
-            <HRVTrendGraph data={hrvHistory.slice().reverse()} height={100} />
-          </div>
-        )}
-      </Card>
-
-      {/* Today's Workout Card */}
-      <Card className="workout-card" hover>
-        <div className="workout-header">
-          <div className="workout-icon">💪</div>
-          <div>
-            <h3 className="card-title">Today's Workout</h3>
-            <p className="workout-subtitle">Based on your recovery status</p>
-          </div>
-        </div>
-
-        <div className="intensity-banner" style={{ background: `linear-gradient(135deg, ${intensity.color}15 0%, ${intensity.color}05 100%)` }}>
-          <div className="intensity-label" style={{ color: intensity.color }}>
-            Recommended Intensity: <strong>{intensity.level}</strong>
-          </div>
-          <p className="intensity-description">{intensity.description}</p>
-        </div>
-
-        <div className="workout-details">
-          <div className="workout-detail-item">
-            <span className="detail-icon">⏱️</span>
+        {/* Phone Content */}
+        <div className="phone-content">
+          {/* Header */}
+          <header className="phone-header">
             <div>
-              <span className="detail-label">Duration</span>
-              <span className="detail-value">30-45 min</span>
+              <h1 className="phone-greeting">{getGreeting()}, {profile.name || 'there'}!</h1>
+              <p className="phone-date">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+            </div>
+            <div className="phone-streak-badge">
+              <span className="streak-icon">🔥</span>
+              <span className="streak-number">{streak}</span>
+            </div>
+          </header>
+
+          {/* Recovery Status */}
+          <div className="phone-recovery-card">
+            <div className="recovery-status-row">
+              <div>
+                <h3 className="recovery-label">Today's Recovery</h3>
+                <StatusBadge status={todayHRV.recoveryScore} />
+              </div>
+              <div className="hrv-display">
+                <span className="hrv-number">{todayHRV.hrv}</span>
+                <span className="hrv-label">ms</span>
+              </div>
+            </div>
+            <div className="recovery-change">
+              <span className={`change-indicator ${todayHRV.deviation >= 0 ? 'positive' : 'negative'}`}>
+                {todayHRV.deviation >= 0 ? '↑' : '↓'} {Math.abs(todayHRV.deviation).toFixed(1)}%
+              </span>
+              <span className="change-text">from baseline</span>
             </div>
           </div>
-          <div className="workout-detail-item">
-            <span className="detail-icon">🎯</span>
-            <div>
-              <span className="detail-label">Focus</span>
-              <span className="detail-value">{profile.goals?.[0] || 'Full body'}</span>
+
+          {/* Intensity Recommendation */}
+          <div className="phone-intensity-banner" style={{
+            background: `linear-gradient(135deg, ${intensity.color}20 0%, ${intensity.color}10 100%)`,
+            borderLeft: `4px solid ${intensity.color}`
+          }}>
+            <div className="intensity-text" style={{ color: intensity.color }}>
+              <strong>{intensity.level}</strong> Intensity
             </div>
+            <p className="intensity-desc">{intensity.description}</p>
           </div>
-        </div>
 
-        <button
-          className="btn-primary workout-start-btn"
-          onClick={handleGenerateWorkout}
-          disabled={isGenerating}
-        >
-          {isGenerating ? 'Generating...' : "Generate Today's Workout"}
-        </button>
-      </Card>
+          {/* Primary Action - Generate Workout */}
+          <button
+            className="phone-primary-btn"
+            onClick={handleGenerateWorkout}
+            disabled={isGenerating}
+          >
+            <span className="btn-icon">💪</span>
+            <span className="btn-text">
+              {isGenerating ? 'Generating Workout...' : "Generate Today's Workout"}
+            </span>
+          </button>
 
-      {/* Quick Actions */}
-      <div className="quick-actions">
-        <h3 className="section-title">Quick Actions</h3>
-        <div className="action-grid">
-          <button className="action-card" onClick={() => setShowMealLog(true)}>
-            <span className="action-icon">🍎</span>
-            <span className="action-label">Log Meal</span>
-          </button>
-          <button className="action-card" onClick={() => setShowFeelingCheck(true)}>
-            <span className="action-icon">💭</span>
-            <span className="action-label">How do you feel?</span>
-          </button>
-          <button className="action-card">
-            <span className="action-icon">💊</span>
-            <span className="action-label">Log Medication</span>
-          </button>
-          <button className="action-card">
-            <span className="action-icon">😴</span>
-            <span className="action-label">Sleep Quality</span>
-          </button>
+          {/* Quick Actions - Simplified to 2 */}
+          <div className="phone-quick-actions">
+            <button className="phone-action-btn" onClick={() => setShowMealLog(true)}>
+              <span className="action-icon">🍎</span>
+              <span className="action-text">Check Meal Safety</span>
+            </button>
+            <button className="phone-action-btn" onClick={() => setShowFeelingCheck(true)}>
+              <span className="action-icon">💭</span>
+              <span className="action-text">Log How You Feel</span>
+            </button>
+          </div>
         </div>
       </div>
-
-      {/* Recent Activity */}
-      {workoutHistory.length > 0 && (
-        <div className="recent-activity">
-          <h3 className="section-title">Recent Activity</h3>
-          {workoutHistory.map((workout, index) => (
-            <Card key={index} className="activity-item">
-              <div className="activity-header">
-                <span className="activity-icon">💪</span>
-                <div className="activity-info">
-                  <h4 className="activity-title">{workout.type}</h4>
-                  <p className="activity-date">
-                    {new Date(workout.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                  </p>
-                </div>
-                <span className="activity-duration">{workout.duration} min</span>
-              </div>
-              {workout.exercises.length > 0 && (
-                <div className="activity-exercises">
-                  {workout.exercises.slice(0, 2).map((ex, i) => (
-                    <span key={i} className="exercise-tag">{ex}</span>
-                  ))}
-                  {workout.exercises.length > 2 && (
-                    <span className="exercise-tag">+{workout.exercises.length - 2} more</span>
-                  )}
-                </div>
-              )}
-            </Card>
-          ))}
-        </div>
-      )}
 
       {/* Meal Log Bottom Sheet */}
       <BottomSheet
