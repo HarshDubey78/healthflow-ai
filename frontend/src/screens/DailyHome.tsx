@@ -154,8 +154,8 @@ export const DailyHome: React.FC = () => {
               </div>
             </div>
             <div className="recovery-change">
-              <span className={`change-indicator ${todayHRV.deviation >= 0 ? 'positive' : 'negative'}`}>
-                {todayHRV.deviation >= 0 ? '↑' : '↓'} {Math.abs(todayHRV.deviation).toFixed(1)}%
+              <span className={`change-indicator ${(todayHRV.deviation || 0) >= 0 ? 'positive' : 'negative'}`}>
+                {(todayHRV.deviation || 0) >= 0 ? '↑' : '↓'} {Math.abs(todayHRV.deviation || 0).toFixed(1)}%
               </span>
               <span className="change-text">from baseline</span>
             </div>

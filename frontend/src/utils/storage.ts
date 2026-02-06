@@ -190,7 +190,8 @@ export const generateSimulatedHRV = (baselineHRV: number = 65): HRVData => {
     hrv,
     restingHR: Math.round(58 + Math.random() * 10),
     sleep: Math.round((6.5 + Math.random() * 2) * 10) / 10,
-    recoveryScore
+    recoveryScore,
+    deviation
   }
 }
 
