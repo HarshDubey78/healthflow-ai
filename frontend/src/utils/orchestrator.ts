@@ -3,7 +3,8 @@
  * Connects DailyHome, Progress, and other screens to the multi-agent system
  */
 
-const API_BASE = 'http://localhost:5001/api'
+// Use relative path for production (Vercel), localhost for development
+const API_BASE = import.meta.env.PROD ? '/api' : 'http://localhost:5001/api'
 
 export interface HRVAnalysisRequest {
   hrv_ms: number
@@ -63,7 +64,7 @@ class HealthFlowOrchestrator {
    */
   async analyzeHRV(data: HRVAnalysisRequest): Promise<HRVAnalysisResponse> {
     try {
-      const response = await fetch(`${API_BASE}/hrv/analyze`, {
+      const response = await fetch(`${API_BASE}/hrv-analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -88,7 +89,7 @@ class HealthFlowOrchestrator {
    */
   async parseMedicalProfile(data: MedicalProfileRequest): Promise<MedicalProfileResponse> {
     try {
-      const response = await fetch(`${API_BASE}/medical/parse`, {
+      const response = await fetch(`${API_BASE}/medical-parse`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -113,7 +114,7 @@ class HealthFlowOrchestrator {
    */
   async generateWorkout(data: WorkoutRequest): Promise<WorkoutResponse> {
     try {
-      const response = await fetch(`${API_BASE}/workout/generate`, {
+      const response = await fetch(`${API_BASE}/workout-generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -138,7 +139,7 @@ class HealthFlowOrchestrator {
    */
   async checkNutrition(data: NutritionRequest): Promise<NutritionResponse> {
     try {
-      const response = await fetch(`${API_BASE}/nutrition/check`, {
+      const response = await fetch(`${API_BASE}/nutrition-check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
