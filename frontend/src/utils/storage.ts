@@ -91,17 +91,7 @@ export const getRecentWorkouts = (count: number = 5): WorkoutHistory[] => {
   return getWorkoutHistory().slice(0, count)
 }
 
-export const markExerciseComplete = (workoutId: string, exerciseName: string): void => {
-  const history = getWorkoutHistory()
-  const workout = history.find(w => w.id === workoutId)
-  if (workout) {
-    const exercise = workout.exercises.find(e => e.name === exerciseName)
-    if (exercise) {
-      exercise.completed = true
-      localStorage.setItem(STORAGE_KEYS.WORKOUT_HISTORY, JSON.stringify(history))
-    }
-  }
-}
+// Removed markExerciseComplete - exercises are stored as string[] not objects
 
 // HRV Data
 export const saveHRVData = (data: HRVData): void => {

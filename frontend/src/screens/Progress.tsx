@@ -7,8 +7,8 @@ import {
   getHRVHistory,
   getWorkoutHistory,
   getCurrentStreak,
-  HRVData,
-  WorkoutHistory
+  type HRVData,
+  type WorkoutHistory
 } from '../utils/storage'
 import '../styles/Progress.css'
 

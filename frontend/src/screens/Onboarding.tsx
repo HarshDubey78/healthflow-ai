@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Card, CardHeader, CardContent } from '../components/ui/Card'
-import { UserProfile, saveUserProfile, generateSimulatedHRV, saveHRVData } from '../utils/storage'
+import { type UserProfile, saveUserProfile, generateSimulatedHRV, saveHRVData } from '../utils/storage'
 import '../styles/Onboarding.css'
 
 interface OnboardingProps {

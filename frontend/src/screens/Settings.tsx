@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from '../components/ui/Card'
 import { BottomSheet } from '../components/ui/BottomSheet'
-import { getUserProfile, saveUserProfile, clearAllData, UserProfile } from '../utils/storage'
+import { getUserProfile, saveUserProfile, clearAllData, type UserProfile } from '../utils/storage'
 import '../styles/Settings.css'
 
 interface SettingsProps {
@@ -48,7 +48,7 @@ export const Settings: React.FC<SettingsProps> = ({ onResetComplete }) => {
     }
   }
 
-  const addItem = (field: 'restrictions' | 'medications' | 'equipment', value: string) => {
+  const addItem = (field: 'restrictions' | 'medications' | 'equipment' | 'goals', value: string) => {
     if (value.trim()) {
       const currentArray = editForm[field] || []
       setEditForm({
@@ -58,7 +58,7 @@ export const Settings: React.FC<SettingsProps> = ({ onResetComplete }) => {
     }
   }
 
-  const removeItem = (field: 'restrictions' | 'medications' | 'equipment', index: number) => {
+  const removeItem = (field: 'restrictions' | 'medications' | 'equipment' | 'goals', index: number) => {
     const currentArray = editForm[field] || []
     setEditForm({
       ...editForm,

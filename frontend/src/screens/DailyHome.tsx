@@ -6,10 +6,8 @@ import {
   getHRVHistory,
   saveHRVData,
   generateSimulatedHRV,
-  getWorkoutHistory,
   getCurrentStreak,
-  type HRVData,
-  type WorkoutHistory
+  type HRVData
 } from '../utils/storage'
 import { orchestrator } from '../utils/orchestrator'
 import '../styles/DailyHome.css'
@@ -88,7 +86,7 @@ export const DailyHome: React.FC = () => {
         baseline_resting_hr: profile.baselineRestingHR || 60,
         sleep_hours: profile.baselineSleep || 7,
         baseline_sleep: profile.baselineSleep || 7,
-        surgery: profile.surgery || 'None',
+        surgery: typeof profile.surgery === 'string' ? profile.surgery : (profile.surgery?.type || 'None'),
         restrictions: profile.restrictions || [],
         medications: profile.medications || [],
         equipment: profile.equipment || [],
