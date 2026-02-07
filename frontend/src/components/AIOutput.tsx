@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface AIOutputProps {
   response: string
   fallback?: boolean

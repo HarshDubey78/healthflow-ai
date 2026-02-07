@@ -23,7 +23,12 @@ interface HRVData {
   }
 }
 
-function HRVCheck({ onAnalysis, onNext }) {
+interface HRVCheckProps {
+  onAnalysis: (analysis: any) => void
+  onNext: () => void
+}
+
+function HRVCheck({ onAnalysis, onNext }: HRVCheckProps) {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<HRVData | null>(null)
 
@@ -54,8 +59,9 @@ function HRVCheck({ onAnalysis, onNext }) {
   if (!data) return <div>Loading...</div>
 
   const hrvData = data.hrv_data
-  const deviation = ((hrvData.hrv_ms - hrvData.baseline_hrv) / hrvData.baseline_hrv * 100).toFixed(1)
-  const status = deviation > -10 ? 'good' : deviation > -20 ? 'moderate' : 'poor'
+  const deviationNum = ((hrvData.hrv_ms - hrvData.baseline_hrv) / hrvData.baseline_hrv * 100)
+  const deviation = deviationNum.toFixed(1)
+  const status = deviationNum > -10 ? 'good' : deviationNum > -20 ? 'moderate' : 'poor'
 
   return (
     <div className="hrv-check">

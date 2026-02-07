@@ -1,5 +1,5 @@
 import React from 'react'
-import { HRVData } from '../../utils/storage'
+import type { HRVData } from '../../utils/storage'
 import '../../styles/HRVTrendGraph.css'
 
 interface HRVTrendGraphProps {

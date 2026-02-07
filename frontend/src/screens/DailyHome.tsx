@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Card } from '../components/ui/Card'
 import { StatusBadge } from '../components/ui/StatusBadge'
-import { HRVTrendGraph } from '../components/ui/HRVTrendGraph'
 import { BottomSheet } from '../components/ui/BottomSheet'
 import {
   getUserProfile,
@@ -10,8 +8,8 @@ import {
   generateSimulatedHRV,
   getWorkoutHistory,
   getCurrentStreak,
-  HRVData,
-  WorkoutHistory
+  type HRVData,
+  type WorkoutHistory
 } from '../utils/storage'
 import { orchestrator } from '../utils/orchestrator'
 import '../styles/DailyHome.css'
@@ -19,8 +17,6 @@ import '../styles/DailyHome.css'
 export const DailyHome: React.FC = () => {
   const [profile] = useState(getUserProfile())
   const [todayHRV, setTodayHRV] = useState<HRVData | null>(null)
-  const [hrvHistory, setHRVHistory] = useState<HRVData[]>([])
-  const [workoutHistory, setWorkoutHistory] = useState<WorkoutHistory[]>([])
   const [streak, setStreak] = useState(0)
   const [showMealLog, setShowMealLog] = useState(false)
   const [showFeelingCheck, setShowFeelingCheck] = useState(false)
@@ -34,7 +30,6 @@ export const DailyHome: React.FC = () => {
 
     // Load HRV data
     const history = getHRVHistory(7)
-    setHRVHistory(history)
 
     // Check if we have today's HRV
     const today = new Date().toDateString()
@@ -47,12 +42,7 @@ export const DailyHome: React.FC = () => {
       const newHRV = generateSimulatedHRV(profile.baselineHRV || 65)
       saveHRVData(newHRV)
       setTodayHRV(newHRV)
-      setHRVHistory([newHRV, ...history].slice(0, 7))
     }
-
-    // Load workout history
-    const workouts = getWorkoutHistory(3)
-    setWorkoutHistory(workouts)
 
     // Load streak
     setStreak(getCurrentStreak())
