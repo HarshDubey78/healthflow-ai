@@ -3,8 +3,8 @@
  * Connects DailyHome, Progress, and other screens to the multi-agent system
  */
 
-// Use relative path for production (Vercel), localhost for development
-const API_BASE = import.meta.env.PROD ? '/api' : 'http://localhost:5001/api'
+// Use environment variable for API URL, fallback to localhost
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api'
 
 export interface HRVAnalysisRequest {
   hrv_ms: number
