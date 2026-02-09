@@ -98,11 +98,13 @@ export const DailyHome: React.FC = () => {
         setWorkoutPlan(result.workout.response)
         setShowWorkout(true)
       } else {
-        alert('Failed to generate workout. Please check if the backend is running on port 5001.')
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api'
+        alert(`Failed to generate workout. API returned an error.\n\nAPI URL: ${apiUrl}\n\nCheck console for details.`)
       }
     } catch (error) {
       console.error('Workout generation error:', error)
-      alert('Error generating workout. Make sure the backend server is running.')
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api'
+      alert(`Error connecting to backend.\n\nAPI URL: ${apiUrl}\n\nMake sure the backend server is running and accessible.`)
     } finally {
       setIsGenerating(false)
     }

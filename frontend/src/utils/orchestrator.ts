@@ -89,7 +89,7 @@ class HealthFlowOrchestrator {
    */
   async parseMedicalProfile(data: MedicalProfileRequest): Promise<MedicalProfileResponse> {
     try {
-      const response = await fetch(`${API_BASE}/medical-parse`, {
+      const response = await fetch(`${API_BASE}/medical/parse`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -114,10 +114,18 @@ class HealthFlowOrchestrator {
    */
   async generateWorkout(data: WorkoutRequest): Promise<WorkoutResponse> {
     try {
-      const response = await fetch(`${API_BASE}/workout-generate`, {
+      const response = await fetch(`${API_BASE}/workout/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+          hrv_analysis: data.hrv_analysis,
+          medical_constraints: data.medical_constraints,
+          user_context: {
+            equipment: data.equipment,
+            time_available: data.time_available,
+            goals: data.goals
+          }
+        })
       })
 
       if (!response.ok) {
@@ -139,7 +147,7 @@ class HealthFlowOrchestrator {
    */
   async checkNutrition(data: NutritionRequest): Promise<NutritionResponse> {
     try {
-      const response = await fetch(`${API_BASE}/nutrition-check`, {
+      const response = await fetch(`${API_BASE}/nutrition/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
